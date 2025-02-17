@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Getel</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- CDN de jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.17/jspdf.plugin.autotable.min.js"></script> <!-- CDN del plugin jsPDF AutoTable -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body style="background-color: #2d3250;">
+
+
+    <nav class="navbar " style="background-color: black;">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="img/getel.jpeg" alt="Bootstrap" width="50" height="50">
+          </a>
+
+          <div class="contai">
+            <button><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" id="Layer_21" height="24" data-name="Layer 21"><title></title><path d="M16.75,9H13.5V7a1,1,0,0,1,1-1h2V3H14a4,4,0,0,0-4,4V9H8v3h2v9h3.5V12H16Z"></path></svg></button>
+            <button><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg></button>
+            <button><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"   id="Layer_21" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+              <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+            </svg></button>
+
+            <div class="notification" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+              <div class="bell-container">
+                  <div class="bell"></div>
+                  <span id="contadorServicios" class="badge">0</span> <!-- Aquí se mostrará el número de servicios -->
+              </div>
+          </div>
+          
+            
+          </div>
+          
+        </div>
+      </nav>
+
+      <div class="container px-4 text-center">
+        <div class="row gx-5">
+          <div class="col">
+           <div class="p-3">
+            <div class="card mb-3" style="max-width: 540px; background-color: #424769; color: white;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="img/getel.jpeg" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Bienvenido a Getel</h5>
+                  <p class="card-text">Hola ingeniero, en este apartado te presentamos varias opciones a eligir, podras encontrar opciones como agregar nuevo servicio, nuego cliente, nuevo proveedor, ver servicios... asi que por donde empezamos?</p>
+                  <p class="card-text"><small class="text-body-secondary">Getel</small></p>
+                </div>
+              </div>
+            </div></div>
+          </div>
+          <div class="col">
+            <div class="p-3">
+
+              <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasRightLabel">Servicios Pendientes</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body" style="background-color: #2d3250; color: white;">
+                  
+                   <!-- Tabla de servicios -->
+                <!-- Contenedor de la tabla responsive -->
+                <div class="table-responsive">
+               <div class="accordion" id="accordionServicios">
+          <!-- Aquí se insertarán los servicios dinámicamente -->
+      </div>
+      
+      </div>
+
+  </div>
+</div>
+
+              
+
+<!-- Modal de servicio seleccionado de la tabla -->
+<div class="modal fade" id="selecservicio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: #2d3250; color: white;">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Infor Servicio</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="modal-servicio-index">
+        <div class="input-group" style="margin-top: 1%;">
+          <input id="modal-cliente" type="text" class="form-control" placeholder="Cliente" aria-label="Recipient's username with two button addons">
+        </div>
+    
+        <div class="form-floating">
+          <textarea id="modal-dni" class="form-control" placeholder="00000000000000"></textarea>
+          <label for="modal-dni">DNI o RNC</label>
+        </div>
+    
+        <div class="form-floating">
+          <textarea id="modal-tiposervicio" class="form-control" placeholder="Ejemplo... Plomeria"></textarea>
+          <label for="modal-tiposervicio">Tipo de servicio</label>
+        </div>
+    
+        <div class="form-floating">
+          <textarea id="modal-detalleservicio" class="form-control" placeholder="Ejemplo... Fregadero Liquea abundante agua al drenar."></textarea>
+          <label for="modal-detalleservicio">Detalle de servicio</label>
+        </div>
+    
+        <div class="form-floating">
+          <textarea id="modal-detalleubicacion" class="form-control" placeholder="Ejemplo... Fregadero Liquea abundante agua al drenar."></textarea>
+          <label for="modal-detalleubicacion">Detalle de ubicacion</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <button onclick="actualizarServicio()" class="save-button" style="color: white;" id="actualizar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="save-svgIcon bi bi-floppy-fill" viewBox="0 0 16 16">
+            <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5z"/>
+            <path d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5zM9 1h2v4H9z"/>
+          </svg>
+        </button>
+
+        <button onclick="eliminarServicio()" class="delete-button" id="borrar">
+          <svg class="delete-svgIcon" viewBox="0 0 448 512">
+                            <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
+                          </svg>
+        </button>
+
+
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  </div>
+</div>  
+                
+            <div class="container text-center" style="margin-top: 10px;">
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                  <div class="col">
+                    <div class="p-3">
+                        <div class="light-button" type="button" data-bs-toggle="modal" data-bs-target="#servicio">
+                            <button class="bt">
+                              <div class="light-holder">
+                                <div class="dot"></div>
+                                <div class="light"></div>
+                              </div>
+                              <div class="button-holder">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
+                                    <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0"/>
+                                  </svg>
+                                <p>Nuevo Servicio</p>
+                              </div>
+                            </button>
+                          </div>
+                          
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="p-3">
+                        <div class="light-button" type="button" data-bs-toggle="modal" data-bs-target="#clie">
+                            <button class="bt">
+                              <div class="light-holder">
+                                <div class="dot"></div>
+                                <div class="light"></div>
+                              </div>
+                              <div class="button-holder">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
+                                  </svg>
+                                <p>Cliente</p>
+                              </div>
+                            </button>
+                          </div>
+                                                      
+                    </div>
+                  </div>
+                  <div class="col" style="margin-top: 30px;">
+                    <div class="light-button" type="button" data-bs-toggle="modal" data-bs-target="#inventario">
+                        <button class="bt">
+                          <div class="light-holder">
+                            <div class="dot"></div>
+                            <div class="light"></div>
+                          </div>
+                          <div class="button-holder">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-seam-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.01-.003.268-.108a.75.75 0 0 1 .558 0l.269.108.01.003zM10.404 2 4.25 4.461 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339L8 5.961 5.596 5l6.154-2.461z"/>
+                              </svg>
+                            <p>Inventario</p>
+                          </div>
+                        </button>
+                      </div>
+                  </div>
+                  <div class="col" style="margin-top: 30px;">
+                    <div class="light-button" type="button" data-bs-toggle="modal" data-bs-target="#modalFactura">
+                        <button class="bt" id="btnFactura">
+                          <div class="light-holder">
+                            <div class="dot"></div>
+                            <div class="light"></div>
+                          </div>
+                          <div class="button-holder">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-receipt-cutoff" viewBox="0 0 16 16">
+                              <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5M11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1z"/>
+                              <path d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118z"/>
+                            </svg>
+                            <p>Facturar</p>
+                          </div>
+                        </button>
+                      </div>
+                  </div>
+                  <div class="col" style="margin-top: 30px;">
+                    <div class="light-button" type="button" data-bs-toggle="modal" data-bs-target="#modalServicios">
+                        <button class="bt">
+                          <div class="light-holder">
+                            <div class="dot"></div>
+                            <div class="light"></div>
+                          </div>
+                          <div class="button-holder">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
+                                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0"/>
+                              </svg>
+                            <p>Servicios</p>
+                          </div>
+                        </button>
+                      </div>
+                  </div>
+                 
+                </div>
+              </div>
+        </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+
+<!-- Modal Servicio -->
+<div class="modal fade" id="servicio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: #2d3250;">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" style="color: white;" id="staticBackdropLabel">Nuevo Servicio</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Cliente ID -->
+        <div class="input-group">
+          <input id="clienteID" type="text" class="form-control" placeholder="Seleccionar Cliente" readonly />
+          <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#modalClientes">
+            Seleccionar
+          </button>
+        </div>
+        
+        
+        <!-- Tipo de Servicio -->
+        <div class="form-floating">
+          <input id="tiposervicio" type="text" class="form-control" placeholder="Ejemplo... Plomeria" />
+          <label for="tiposervicio">Tipo de servicio</label>
+        </div>
+
+        <!-- Detalle del Servicio -->
+        <div class="form-floating">
+          <textarea id="detalleservicio" class="form-control" placeholder="Ejemplo... Fregadero liquea abundante agua al drenar."></textarea>
+          <label for="detalleservicio">Detalle de servicio</label>
+        </div>
+
+        <!-- Estado del Servicio -->
+        <div class="form-floating">
+          <select id="estado" class="form-control">
+            <option value="Pendiente">Pendiente</option>
+            <option value="En Proceso">En Proceso</option>
+            <option value="Finalizado">Finalizado</option>
+          </select>
+          <label for="estado">Estado del Servicio</label>
+        </div>
+
+        <!-- Fecha de Creación -->
+        <div class="form-floating">
+          <input id="fechaCreacion" type="date" class="form-control" />
+          <label for="fechaCreacion">Fecha de Creación</label>
+        </div>
+
+        <!-- Fecha de Cierre -->
+        <div class="form-floating">
+          <input id="fechaCierre" type="date" class="form-control" />
+          <label for="fechaCierre">Fecha de Cierre</label>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="guardarServicio()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Cliente -->
+<div class="modal fade" id="clie" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: #2d3250; color: white;">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Cliente</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" name="cliente">
+          <div class="col-md-6">
+            <label for="inputName" class="form-label">Nombre</label>
+            <input type="text" name="nombre" class="form-control" id="nombre">
+          </div>
+          <div class="col-md-6">
+            <label for="inputDNI" class="form-label">DNI</label>
+            <input type="text" name="identidad" class="form-control" id="dniCliente">
+          </div>
+          <div class="col-md-6">
+            <label for="inputTelefono" class="form-label">Telefono</label>
+            <input type="text" name="telefono" class="form-control" id="telefono">
+          </div>
+          <div class="col-md-6">
+            <label for="inputEmail" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" id="email">
+          </div>
+          <div class="col-12">
+            <label for="inputAddress" class="form-label">Direccion</label>
+            <input type="text" name="direccion" class="form-control" id="direccion" placeholder="1234 Main St">
+          </div>
+        
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+
+        <button class="listaclientes" style="color: white;" data-bs-toggle="modal" data-bs-target="#listaClientesModal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-badge-fill" viewBox="0 0 16 16">
+              <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6m5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1z"/>
+          </svg>
+      </button>
+      
+
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="guardarClienteBtn">Guardar</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Lista de Clientes -->
+<div class="modal fade" id="listaClientesModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="listaClientesLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: #2d3250; color: white;">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="listaClientesLabel">Lista de Clientes</h1>
+        <div class="container-buscar">
+          <input type="text" name="text" id="inputBuscar" class="input" required="" placeholder="Escribe...">
+          <div class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+                  <title>Search</title>
+                  <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
+                  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
+              </svg>
+          </div>
+      </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="accordion" id="accordionExample">
+          <!-- Aquí se cargarán dinámicamente los clientes -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Selección de Clientes -->
+<div class="modal fade" id="modalClientes" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalClientesLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: #2d3250; color: white;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalClientesLabel">Seleccionar Cliente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="accordion" id="accordionClientes">
+          <!-- Aquí se insertarán los clientes dinámicamente -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Modal inventario-->
+    <div class="modal fade" id="inventario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" style="background-color: #2d3250; color: white;">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Inventario</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <button class="button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              <span class="button__text">Agregar Producto</span>
+              <span class="button__icon">
+                <svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="12" x2="12" y1="5" y2="19"></line>
+                  <line x1="5" x2="19" y1="12" y2="12"></line>
+                </svg>
+              </span>
+            </button>
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body" style="background-color: #2d3250; color: white;">
+                <div class="shadow p-3 mb-4 rounded" style="background-color: #2d3250;">Nuevo Producto</div>
+    
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
+                  <input type="text" id="nombreProducto" class="form-control" placeholder="Ingrese el nombre del producto" required>
+                </div>
+    
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Descripción</span>
+                  <textarea id="descripcionProducto" class="form-control" placeholder="Ingrese la descripción del producto"></textarea>
+                </div>
+    
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Cantidad</span>
+                  <input type="number" id="cantidadProducto" class="form-control" min="0" placeholder="Cantidad disponible" required>
+                </div>
+    
+                <div class="input-group mb-3">
+                  <span class="input-group-text">$</span>
+                  <input type="number" id="precioProducto" class="form-control" step="0.01" min="0" placeholder="Precio unitario" required>
+                  <span class="input-group-text">DOP</span>
+                </div>
+    
+                <button id="guardarProductoBtn" class="btn btn-success">Guardar Producto</button>
+
+    
+              </div>
+            </div>
+
+    
+            <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+              <table class="table table-dark table-striped">
+                  <thead>
+                      <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Nombre</th>
+                          <th scope="col">Descripción</th>
+                          <th scope="col">Cantidad</th>
+                          <th scope="col">Precio (DOP)</th>
+                          <th scope="col">Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody id="tablaInventario">
+                      <!-- Aquí se insertarán dinámicamente los productos -->
+                  </tbody>
+              </table>
+          </div>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Servicios -->
+<div class="modal fade" id="modalServicios" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalClientesLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" style="background-color: #2d3250; color: white;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalClientesLabel">Seleccionar Cliente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       
+        <div class="container mt-5">
+          <h2 class="text-center mb-4">Servicios Guardados</h2>
+  
+          <!-- Caja de búsqueda -->
+          <div class="mb-3">
+              <input type="text" id="busqueda" class="form-control" placeholder="Buscar servicio..." onkeyup="filtrarServicios()">
+          </div>
+  
+          <!-- Tabla de servicios -->
+          <div class="table-responsive">
+              <table class="table table-dark table-hover">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Cliente</th>
+                          <th>Tipo de Servicio</th>
+                          <th>Detalle</th>
+                          <th>Estado</th>
+                          <th>Fecha Creación</th>
+                          <th>Fecha Cierre</th>
+                          <th>Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody id="tablaServicios">
+                      <!-- Los datos se insertarán dinámicamente aquí -->
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Editar Servicio -->
+<div class="modal fade" id="modalEditarServicio" tabindex="-1" aria-labelledby="modalEditarServicioLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: #2d3250; color: white;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEditarServicioLabel">Editar Servicio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="editServicioId"> <!-- ID oculto -->
+
+        <div class="mb-3">
+          <label for="editNombreCliente" class="form-label">Cliente</label>
+          <input type="text" id="editNombreCliente" class="form-control" disabled>
+        </div>
+
+        <div class="mb-3">
+          <label for="editTipoServicio" class="form-label">Tipo de Servicio</label>
+          <input type="text" id="editTipoServicio" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label for="editDetalleServicio" class="form-label">Detalle</label>
+          <textarea id="editDetalleServicio" class="form-control"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="editEstadoServicio" class="form-label">Estado</label>
+          <select id="editEstadoServicio" class="form-control">
+            <option value="pendiente">Pendiente</option>
+            <option value="En proceso">En proceso</option>
+            <option value="completado">Completado</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="editFechaCreacion" class="form-label">Fecha de Creación</label>
+          <input type="date" id="editFechaCreacion" class="form-control" disabled>
+        </div>
+
+        <div class="mb-3">
+          <label for="editFechaCierre" class="form-label">Fecha de Cierre</label>
+          <input type="date" id="editFechaCierre" class="form-control">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="guardarCambiosServicio()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Facturas guardadas -->
+<div class="modal fade" id="modalFactura" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalFacturasLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" style="background-color: #2d3250; color: white;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalFacturasLabel">Facturas Guardadas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Tabla de facturas -->
+        <table class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Cliente</th>
+              <th>Total</th>
+              <th>Fecha</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaFacturas">
+            <!-- Aquí se insertarán las filas dinámicamente -->
+          </tbody>
+        </table>
+        
+        <!-- Contenedor para detalles de la factura -->
+        <div id="detalleFactura" style="display: none; margin-top: 20px;">
+          <h5>Detalles de Factura</h5>
+          <p><strong>Cliente:</strong> <span id="detalleCliente"></span></p>
+          <p><strong>Total:</strong> $<span id="detalleTotal"></span></p>
+          <h6>Productos</h6>
+          <table class="table table-light table-striped">
+            <thead>
+              <tr>
+                <th>Cantidad</th>
+                <th>Descripción</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="tablaDetallesFactura">
+              <!-- Detalles de productos irán aquí -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Facturar -->
+<div class="modal fade" id="modalFacturar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalFacturarLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" style="background-color: #2d3250; color: white;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalFacturarLabel">Facturar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Información de la empresa -->
+        <div class="d-flex justify-content-between">
+          <div>
+            <h2>Getel</h2>
+            <p>Servicio Profesional</p>
+            <p>Dirección: Santo Domingo, República Dominicana.</p>
+            <p>Tel: +1 (829) 925-3567</p>
+            <p>Correo: Getel@gmail.com</p>
+          </div>
+          <div>
+            <h3>Factura</h3>
+            <p><strong>N° FACTURA:</strong> <span id="facturaNumero"></span></p>
+            <p><strong>FECHA:</strong> <span id="facturaFecha"></span></p>
+          </div>
+        </div>
+
+        <hr>
+
+        <!-- Información del Cliente -->
+        <div class="mb-3">
+          <h3>Para</h3>
+          <p><strong>Nombre:</strong> <span id="clienteNombre"></span></p>
+          <p><strong>DNI/RNC:</strong> <span id="clienteDNI"></span></p>
+          <p><strong>Teléfono:</strong> <span id="clienteTelefono"></span></p>
+          <p><strong>Correo:</strong> <span id="clienteCorreo"></span></p>
+          <p><strong>Dirección:</strong> <span id="clienteDireccion"></span></p>
+        </div>
+
+        <hr>
+
+        <!-- Información del Servicio -->
+        <div class="mb-3">
+          <h3>Detalles del Servicio</h3>
+          <p><strong>Trabajo:</strong> <span id="facturaTrabajo"></span></p>
+          <p><strong>Descripción:</strong> <span id="facturaDetalle"></span></p>
+        </div>
+
+        <hr>
+
+        <!-- Condiciones de Pago -->
+        <div class="mb-3">
+          <h3>Condiciones de Pago</h3>
+          <input type="text" id="condicionesPago" class="form-control" placeholder="Ingrese condiciones de pago manualmente">
+        </div>
+
+        <hr>
+
+       <!-- Agregar Productos Opcionales -->
+<h4>Agregar Productos</h4>
+<div class="row mb-3">
+    <div class="col-md-2">
+        <label for="inputCantidad" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="inputCantidad">
+    </div>
+    <div class="col-md-4">
+        <label for="selectDescripcion" class="form-label">Descripción</label>
+        <input type="text" id="inputDescripcion" class="form-control" placeholder="Descripción del producto">
+    </div>
+    <div class="col-md-2">
+        <label for="inputPrecio" class="form-label">P. Unitario</label>
+        <input type="number" class="form-control" id="inputPrecio" >
+    </div>
+    <div class="col-md-2">
+        <label for="inputTotal" class="form-label">P. Total</label>
+        <input type="number" class="form-control" id="inputTotal" disabled>
+    </div>
+    <div class="col-md-2 d-flex align-items-end">
+        <button class="btn btn-primary me-2" id="agregarProducto">Agregar</button>
+        <button class="btn btn-secondary" id="abrirInventario">Inventario</button>
+    </div>
+</div>
+
+
+        <!-- Tabla de Detalle de Factura -->
+        <h4 class="mt-4">Detalle de Factura</h4>
+        <!-- Contenedor para hacer la tabla responsive -->
+<div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+  <table class="table table-bordered mt-2">
+      <thead>
+          <tr>
+              <th>Cantidad</th>
+              <th>Descripción</th>
+              <th>P. Unitario</th>
+              <th>P. Total</th>
+              <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody id="cuerpoTabla">
+      </tbody>
+  </table>
+</div>
+
+
+        <!-- Totales -->
+        <div class="row">
+          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <table class="table">
+              <tr>
+                <td>Subtotal</td>
+                <td id="subtotalFactura">0.00</td>
+              </tr>
+              <tr>
+                <td>Impuestos</td>
+                <td id="impuestosFactura">0.00</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td><strong id="totalFactura">0.00</strong></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Botón de Guardar Factura -->
+        <button class="btn btn-success mt-3" id="guardarFactura">Guardar Factura</button>
+        <!-- Botón Imprimir Factura -->
+        <button id="btnImprimir" class="btn btn-success mt-3">Imprimir Factura</button>
+
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div> 
+  </div>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<!--SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script type="module" src="index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> 
+
+
+</body>
+</html> 

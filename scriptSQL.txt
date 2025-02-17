@@ -1,0 +1,65 @@
+-- Migrations will appear here as you chat with AI
+
+create table clientes (
+  id bigint primary key generated always as identity,
+  nombre text not null,
+  dni_rnc text unique not null,
+  telefono text,
+  correo text,
+  direccion text
+);
+
+create table servicios (
+  id bigint primary key generated always as identity,
+  cliente_id bigint,
+  tipo_servicio text,
+  detalle text,
+  estado text check (
+    estado in (
+      'Pendiente',
+      'En proceso',
+      'Completado',
+      'Cancelado'
+    )
+  ) default 'Pendiente',
+  fecha_creacion timestamp with time zone default current_timestamp,
+  fecha_cierre timestamp with time zone,
+  foreign key (cliente_id) references clientes (id)
+);
+
+create table ubicaciones (
+  id bigint primary key generated always as identity,
+  cliente_id bigint,
+  direccion text,
+  detalle text,
+  foreign key (cliente_id) references clientes (id)
+);
+
+create table inventario (
+  id bigint primary key generated always as identity,
+  nombre text not null,
+  descripcion text,
+  cantidad int not null default 0,
+  precio_unitario numeric(10, 2) not null
+);
+
+create table facturas (
+  id bigint primary key generated always as identity,
+  cliente_id bigint,
+  servicio_id bigint,
+  total numeric(10, 2) not null,
+  fecha timestamp with time zone default current_timestamp,
+  foreign key (cliente_id) references clientes (id),
+  foreign key (servicio_id) references servicios (id)
+);
+
+create table detalle_factura (
+  id bigint primary key generated always as identity,
+  factura_id bigint,
+  inventario_id bigint,
+  cantidad int not null,
+  precio_unitario numeric(10, 2) not null,
+  subtotal numeric(10, 2) not null,
+  foreign key (factura_id) references facturas (id),
+  foreign key (inventario_id) references inventario (id)
+);
