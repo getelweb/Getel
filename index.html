@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Getel</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- CDN de jsPDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.17/jspdf.plugin.autotable.min.js"></script> <!-- CDN del plugin jsPDF AutoTable -->
-    <script src="https://cdn.tailwindcss.com"></script>
+   
+    
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
 
 
@@ -17,7 +18,7 @@
   <body style="background-color: #2d3250;">
 
 
-    <nav class="navbar " style="background-color: black;">
+    <nav class="navbar " style="background-color: black;"> 
         <div class="container">
           <a class="navbar-brand" href="#">
             <img src="img/getel.jpeg" alt="Bootstrap" width="50" height="50">
@@ -388,6 +389,8 @@
   </div>
 </div>
 
+
+
 <!-- Modal Selección de Clientes -->
 <div class="modal fade" id="modalClientes" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalClientesLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -410,81 +413,86 @@
 
 
 
-    <!-- Modal inventario-->
-    <div class="modal fade" id="inventario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content" style="background-color: #2d3250; color: white;">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Inventario</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <button class="button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-              <span class="button__text">Agregar Producto</span>
-              <span class="button__icon">
-                <svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                  <line x1="12" x2="12" y1="5" y2="19"></line>
-                  <line x1="5" x2="19" y1="12" y2="12"></line>
-                </svg>
-              </span>
-            </button>
-            <div class="collapse" id="collapseExample">
-              <div class="card card-body" style="background-color: #2d3250; color: white;">
-                <div class="shadow p-3 mb-4 rounded" style="background-color: #2d3250;">Nuevo Producto</div>
-    
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
-                  <input type="text" id="nombreProducto" class="form-control" placeholder="Ingrese el nombre del producto" required>
-                </div>
-    
-                <div class="input-group mb-3">
-                  <span class="input-group-text">Descripción</span>
-                  <textarea id="descripcionProducto" class="form-control" placeholder="Ingrese la descripción del producto"></textarea>
-                </div>
-    
-                <div class="input-group mb-3">
-                  <span class="input-group-text">Cantidad</span>
-                  <input type="number" id="cantidadProducto" class="form-control" min="0" placeholder="Cantidad disponible" required>
-                </div>
-    
-                <div class="input-group mb-3">
-                  <span class="input-group-text">$</span>
-                  <input type="number" id="precioProducto" class="form-control" step="0.01" min="0" placeholder="Precio unitario" required>
-                  <span class="input-group-text">DOP</span>
-                </div>
-    
-                <button id="guardarProductoBtn" class="btn btn-success">Guardar Producto</button>
+<!-- Modal inventario-->
+<div class="modal fade" id="inventario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: #2d3250; color: white;">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Inventario</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <button class="button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          <span class="button__text">Agregar Producto</span>
+          <span class="button__icon">
+            <svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <line x1="12" x2="12" y1="5" y2="19"></line>
+              <line x1="5" x2="19" y1="12" y2="12"></line>
+            </svg>
+          </span>
+        </button>
+        
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body" style="background-color: #2d3250; color: white;">
+            <div class="shadow p-3 mb-4 rounded" style="background-color: #2d3250;">Nuevo Producto</div>
 
-    
-              </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
+              <input type="text" id="nombreProducto" class="form-control" placeholder="Ingrese el nombre del producto" required>
             </div>
 
-    
-            <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
-              <table class="table table-dark table-striped">
-                  <thead>
-                      <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Nombre</th>
-                          <th scope="col">Descripción</th>
-                          <th scope="col">Cantidad</th>
-                          <th scope="col">Precio (DOP)</th>
-                          <th scope="col">Acciones</th>
-                      </tr>
-                  </thead>
-                  <tbody id="tablaInventario">
-                      <!-- Aquí se insertarán dinámicamente los productos -->
-                  </tbody>
-              </table>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Descripción</span>
+              <textarea id="descripcionProducto" class="form-control" placeholder="Ingrese la descripción del producto"></textarea>
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text">Cantidad</span>
+              <input type="number" id="cantidadProducto" class="form-control" min="0" placeholder="Cantidad disponible" required>
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text">$</span>
+              <input type="number" id="precioProducto" class="form-control" step="0.01" min="0" placeholder="Precio unitario" required>
+              <span class="input-group-text">DOP</span>
+            </div>
+
+            <button id="guardarProductoBtn" class="btn btn-success">Guardar Producto</button>
           </div>
-          
+        </div>
+
+        <!-- Buscador de productos -->
+        <div class="input-group mb-3">
+          <span class="input-group-text">Buscar</span>
+          <input type="text" id="buscadorInventario" class="form-control" placeholder="Buscar producto por nombre...">
+        </div>
+
+        <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+          <table class="table table-dark table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio (DOP)</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tablaInventario">
+              <!-- Aquí se insertarán dinámicamente los productos -->
+            </tbody>
+          </table>
+        </div>
       </div>
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
 </div>
+
 
 
 <!-- Modal Servicios -->
@@ -564,10 +572,10 @@
         <div class="mb-3">
           <label for="editEstadoServicio" class="form-label">Estado</label>
           <select id="editEstadoServicio" class="form-control">
-            <option value="pendiente">Pendiente</option>
+            <option value="Pendiente">Pendiente</option>
             <option value="En proceso">En proceso</option>
-            <option value="completado">Completado</option>
-            <option value="cancelado">Cancelado</option>
+            <option value="Completado">Completado</option>
+            <option value="Cancelado">Cancelado</option>
           </select>
         </div>
 
@@ -782,6 +790,49 @@
   </div>
 </div>
 
+<!-- Modal para Editar Cliente -->
+<div class="modal fade" id="modalEditarCliente" tabindex="-1" aria-labelledby="modalEditarClienteLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: #2d3250; color: white;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEditarClienteLabel">Editar Cliente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="editClienteId"> <!-- ID oculto -->
+
+        <div class="mb-3">
+          <label for="editNombreCliente" class="form-label">Nombre</label>
+          <input type="text" id="editNombreCliente" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label for="editDniRncCliente" class="form-label">DNI/RNC</label>
+          <input type="text" id="editDniRncCliente" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label for="editTelefonoCliente" class="form-label">Teléfono</label>
+          <input type="text" id="editTelefonoCliente" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label for="editCorreoCliente" class="form-label">Correo</label>
+          <input type="email" id="editCorreoCliente" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label for="editDireccionCliente" class="form-label">Dirección</label>
+          <textarea id="editDireccionCliente" class="form-control"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="guardarCambiosCliente()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
