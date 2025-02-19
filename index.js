@@ -93,36 +93,137 @@ window.seleccionarCliente = function (id, nombre) {
   }
 };
 
-function mostrarClientesEnAcordeon(clientes) {
-  const accordionContainer = document.getElementById("accordionExample");
-  accordionContainer.innerHTML = ''; // Limpiar contenido previo
+const mostrarClientesEnAcordeon = async () => {
+    const { data, error } = await supabase.from("clientes").select("*");
 
-  clientes.forEach((cliente, index) => {
-      const item = document.createElement('div');
-      item.classList.add('accordion-item');
-      item.innerHTML = `
-          <h2 class="accordion-header" id="heading${index}">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}" aria-expanded="true" aria-controls="collapse${index}">
-                  ${cliente.nombre} - ${cliente.dni_rnc}
-              </button>
-          </h2>
-          <div id="collapse${index}" class="accordion-collapse collapse" aria-labelledby="heading${index}" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                  <strong>Teléfono:</strong> ${cliente.telefono} <br>
-                  <strong>Email:</strong> ${cliente.correo} <br>
-                  <strong>Dirección:</strong> ${cliente.direccion}
-                  <br><br>
-                  <button class="delete-button" onclick="eliminarCliente(${cliente.id}, this)">
-                      <svg class="delete-svgIcon" viewBox="0 0 448 512">
-                          <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
-                      </svg>
-                  </button>
-              </div>
-          </div>
-      `;
-      accordionContainer.appendChild(item);
-  });
-}  
+    if (error) {
+        console.error("Error al obtener clientes:", error);
+        return;
+    }
+
+    console.log("Clientes obtenidos:", data); // Verifica si hay datos
+
+    const accordionContainer = document.getElementById("accordionExample");
+    accordionContainer.innerHTML = ''; // Limpiar contenido previo
+
+    data.forEach((cliente, index) => {
+        const item = document.createElement('div');
+        item.classList.add('accordion-item');
+        item.innerHTML = `
+            <h2 class="accordion-header" id="heading${index}">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" 
+    data-bs-target="#collapse${index}" aria-expanded="true" 
+    aria-controls="collapse${index}">
+    ${cliente.nombre ? cliente.nombre.trim() : "Nombre no disponible"} - 
+    ${cliente.dni_rnc ? cliente.dni_rnc.trim() : "Sin DNI/RNC"}
+</button>
+
+            </h2>
+            <div id="collapse${index}" class="accordion-collapse collapse" 
+                aria-labelledby="heading${index}" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <strong>Teléfono:</strong> ${cliente.telefono || "No registrado"} <br>
+                    <strong>Email:</strong> ${cliente.correo || "No registrado"} <br>
+                    <strong>Dirección:</strong> ${cliente.direccion || "No registrada"} <br>
+                    <button class="btn btn-warning btn-sm mt-2" onclick="editarCliente(${cliente.id})">
+                        Editar
+                    </button>
+                </div>
+            </div>
+        `;
+        accordionContainer.appendChild(item);
+    });
+};
+
+// Llamar a la función cuando cargue la página
+document.addEventListener("DOMContentLoaded", mostrarClientesEnAcordeon);
+
+// Función para abrir el modal de edición con los datos del cliente seleccionado
+
+
+window.editarCliente = async (id) => {
+    console.log("Editando cliente con ID:", id);
+
+    // Obtener los datos del cliente desde Supabase
+    const { data, error } = await supabase
+        .from("clientes")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+    if (error) {
+        console.error("Error al obtener cliente:", error);
+        return;
+    }
+
+    console.log("Cliente seleccionado:", data); // Verifica los datos en la consola
+
+    // Asegurar que los elementos existen antes de asignar valores
+    const nombreInput = document.getElementById("editNombreCliente");
+    const dniInput = document.getElementById("editDniRncCliente");
+    const telefonoInput = document.getElementById("editTelefonoCliente");
+    const correoInput = document.getElementById("editCorreoCliente");
+    const direccionInput = document.getElementById("editDireccionCliente");
+    const idInput = document.getElementById("editClienteId");
+
+    if (!nombreInput || !dniInput || !telefonoInput || !correoInput || !direccionInput || !idInput) {
+        console.error("Uno o más elementos del formulario no existen en el DOM.");
+        return;
+    }
+
+    // Asignar los valores obtenidos al formulario
+    idInput.value = data.id;
+    nombreInput.value = data.nombre;
+    dniInput.value = data.dni_rnc;
+    telefonoInput.value = data.telefono || "";
+    correoInput.value = data.correo || "";
+    direccionInput.value = data.direccion || "";
+
+    // Mostrar el modal
+    const modal = new bootstrap.Modal(document.getElementById("modalEditarCliente"));
+    modal.show();
+};
+
+window.guardarCambiosCliente = async () => {
+    const id = document.getElementById("editClienteId").value;
+    const nombre = document.getElementById("editNombreCliente").value.trim();
+    const dniRnc = document.getElementById("editDniRncCliente").value.trim();
+    const telefono = document.getElementById("editTelefonoCliente").value.trim();
+    const correo = document.getElementById("editCorreoCliente").value.trim();
+    const direccion = document.getElementById("editDireccionCliente").value.trim();
+
+    if (!id || !nombre || !dniRnc) {
+        console.error("El nombre y el DNI/RNC son obligatorios.");
+        return;
+    }
+
+    const { error } = await supabase
+        .from("clientes")
+        .update({
+            nombre,
+            dni_rnc: dniRnc,
+            telefono,
+            correo,
+            direccion,
+        })
+        .eq("id", id);
+
+    if (error) {
+        console.error("Error al actualizar cliente:", error);
+        return;
+    }
+
+    console.log("Cliente actualizado correctamente.");
+
+    // Cerrar el modal después de guardar
+    const modal = bootstrap.Modal.getInstance(document.getElementById("modalEditarCliente"));
+    modal.hide();
+
+    // Recargar la lista de clientes
+    mostrarClientesEnAcordeon();
+
+
+};
 
 
 window.eliminarCliente = async function(clienteId, button) {
@@ -215,10 +316,15 @@ const mostrarServiciosEnAcordeon = async () => {
         return;
     }
 
+    // Filtrar solo los servicios que no estén cancelados o completados
+    const serviciosPendientes = data.filter(servicio => 
+        servicio.estado !== "Cancelado" && servicio.estado !== "Completado"
+    );
+
     const contenedor = document.getElementById("accordionServicios");
     contenedor.innerHTML = ""; // Limpiar contenido previo
 
-    data.forEach((servicio, index) => {
+    serviciosPendientes.forEach((servicio, index) => {
         const acordeonItem = `
             <div class="accordion-item">
                 <h2 class="accordion-header" id="heading${index}">
@@ -233,7 +339,6 @@ const mostrarServiciosEnAcordeon = async () => {
                         <p><strong>Fecha Creación:</strong> ${new Date(servicio.fecha_creacion).toLocaleDateString()}</p>
                         <p><strong>Fecha Cierre:</strong> ${servicio.fecha_cierre ? new Date(servicio.fecha_cierre).toLocaleDateString() : "Pendiente"}</p>
                         <button class="btn btn-warning btn-sm" onclick="editarServicio(${servicio.id})">Editar</button>
-                        <button class="btn btn-danger btn-sm" onclick="eliminarServicio(${servicio.id})">Eliminar</button>
                     </div>
                 </div>
             </div>
@@ -303,7 +408,6 @@ const obtenerServicios = async () => {
                 <td>
                     <button class="btn btn-primary btn-sm" onclick="editarServicio(${servicio.id})">Editar</button>
                     <button class="btn btn-secondary btn-sm" onclick="cargarFactura(${servicio.id})" data-bs-toggle="modal" data-bs-target="#modalFacturar">Facturar</button>
-                    <button class="btn btn-danger btn-sm" onclick="eliminarServicio(${servicio.id})">Eliminar</button>
                 </td>
             </tr>
         `;
@@ -643,7 +747,7 @@ const agregarProducto = async () => {
 };
 
 // Función para obtener el inventario y mostrarlo en la tabla
-const obtenerInventario = async () => {
+window.obtenerInventario = async () => {
     const { data, error } = await supabase.from('inventario').select('*');
 
     if (error) {
@@ -663,7 +767,9 @@ const obtenerInventario = async () => {
                 <td>${producto.cantidad}</td>
                 <td>${producto.precio_unitario.toFixed(2)}</td>
                 <td>
-                    <button class="btn btn-primary btn-sm" onclick="editarProducto(${producto.id})">Editar</button>
+                    <button class="btn btn-success btn-sm" onclick="ingresarProducto(${producto.id}, ${producto.cantidad}, ${producto.precio_unitario})">
+                        Ingresar
+                    </button>
                     <button class="btn btn-danger btn-sm" onclick="eliminarProducto(${producto.id})">Eliminar</button>
                 </td>
             </tr>
@@ -672,9 +778,62 @@ const obtenerInventario = async () => {
     });
 };
 
+// Función para ingresar cantidad y actualizar precio
+window.ingresarProducto = async (id, cantidadActual, precioActual) => {
+    // Preguntar cuánta cantidad desea ingresar
+    let cantidadIngresada = prompt("Ingrese la cantidad a agregar:", "0");
+    cantidadIngresada = parseInt(cantidadIngresada, 10);
+
+    if (isNaN(cantidadIngresada) || cantidadIngresada < 0) {
+        alert("Cantidad inválida.");
+        return;
+    }
+
+    const nuevaCantidad = cantidadActual + cantidadIngresada;
+
+    // Preguntar si desea actualizar el precio
+    let actualizarPrecio = confirm("¿Desea cambiar el precio del producto?");
+    let nuevoPrecio = precioActual;
+
+    if (actualizarPrecio) {
+        let precioIngresado = prompt("Ingrese el nuevo precio:", precioActual);
+        nuevoPrecio = parseFloat(precioIngresado);
+
+        if (isNaN(nuevoPrecio) || nuevoPrecio < 0) {
+            alert("Precio inválido.");
+            return;
+        }
+    }
+
+    // Actualizar en la base de datos
+    const { error } = await supabase
+        .from('inventario')
+        .update({ cantidad: nuevaCantidad, precio_unitario: nuevoPrecio })
+        .eq('id', id);
+
+    if (error) {
+        console.error('Error al actualizar el producto:', error);
+        alert("Hubo un error al actualizar el producto.");
+        return;
+    }
+
+    alert("Producto actualizado correctamente.");
+    obtenerInventario(); // Refrescar la tabla
+};
+
 // Llamar a la función cuando cargue la página
 document.addEventListener("DOMContentLoaded", obtenerInventario);
 
+
+document.getElementById("buscadorInventario").addEventListener("input", function () {
+    let filtro = this.value.toLowerCase();
+    let filas = document.querySelectorAll("#tablaInventario tr");
+
+    filas.forEach((fila) => {
+      let nombre = fila.children[1]?.textContent.toLowerCase() || "";
+      fila.style.display = nombre.includes(filtro) ? "" : "none";
+    });
+  });
 
 // Función para limpiar el formulario después de guardar
 const limpiarFormulario = () => {
@@ -684,10 +843,7 @@ const limpiarFormulario = () => {
     document.getElementById("precioProducto").value = "";
 };
 
-const editarProducto = (id) => {
-    alert(`Editar producto con ID: ${id}`);
-    // Aquí puedes abrir un modal para editar el producto
-};
+
 
 window.eliminarProducto = async (id) => {
     const confirmacion = confirm("¿Estás seguro de que deseas eliminar este producto?");
